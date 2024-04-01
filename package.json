@@ -1,0 +1,48 @@
+{
+  "name": "create-leedom",
+  "version": "0.1.0",
+  "packageManager": "pnpm@8.6.11",
+  "type": "module",
+  "description": "An easy way to create a new project",
+  "bin": {
+    "create-leedom": "./dist/index.cjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "release": "bumpp && pnpm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leedomjs/create-leedom.git"
+  },
+  "author": "Leedom",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leedomjs/create-leedom/issues"
+  },
+  "homepage": "https://github.com/leedomjs/create-leedom#readme",
+  "devDependencies": {
+    "@types/node": "^20.12.2",
+    "bumpp": "^9.4.0",
+    "typescript": "^5.4.3",
+    "unbuild": "^2.0.0"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "degit": "^2.8.4",
+    "glob": "^10.3.12",
+    "gradient-string": "^2.0.2",
+    "picocolors": "^1.0.0"
+  }
+}
