@@ -14,7 +14,7 @@ const choices: ChoiceList = {
     { label: '远程仓库', value: 'repo' },
   ],
   type: [
-    { label: 'mobile', value: 'mobile' },
+    { label: 'Mobile', value: 'mobile' },
     { label: 'PC', value: 'pc' },
   ],
   mobile: [

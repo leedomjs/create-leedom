@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "release": "bumpp && pnpm publish"
+    "release": "unbuild && bumpp && pnpm publish"
   },
   "repository": {
     "type": "git",

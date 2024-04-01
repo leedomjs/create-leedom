@@ -39,7 +39,7 @@ async function init() {
 		validate: (value) => {
       const existDirectoryName = path.resolve(process.cwd(), path.join('.', value))
 			if (!value) return 'Input your project name first!';
-			if (checkDuplicateDir(value)) return `当前目录 ${color.underline(color.cyan(`${existDirectoryName}`))} 已经存在，请另起项目名!`
+			if (checkDuplicateDir(value)) return `Target directory ${color.underline(color.cyan(`${existDirectoryName}`))} already exists. Pick another name!`
 		},
 	})
 	if (isCancel(name)) {
@@ -76,7 +76,7 @@ async function init() {
 	const target = path.join(name || '.', '')
 	
 	emitter.clone(target).then(async() => {
-		s.stop('Succeed!');
+		s.stop(color.green(('Succeed!')));
 		p.note(`cd ${target}\npnpm install\npnpm dev`, 'Next steps.');
 		outro(`Problems? ${color.underline(color.cyan(`${bugs.url}`))}`)
 	});
