@@ -1,4 +1,7 @@
 import gradient from 'gradient-string';
+import glob from 'glob';
+import fs from 'node:fs';
+import path from 'node:path';
 
 // 渐变色打印
 const banner = gradient([
@@ -14,4 +17,22 @@ const getBanner = () => {
   console.log();
 }
 
-export { banner, getBanner }
+
+/**
+ * Check if there is duplicate directory
+ */
+const checkDuplicateDir = (projectName: string): boolean => {
+  const list = glob.sync('*')
+  if (list.length) {
+    const hasDuplicateNameDir = list.filter((name) => {
+      const fileName = path.resolve(process.cwd(), path.join('.', name))
+      const isDir = fs.statSync(fileName).isDirectory()
+      return name === projectName && isDir
+    })
+		return hasDuplicateNameDir.length > 0
+  } else {
+    return true
+  }
+}
+
+export { banner, getBanner, checkDuplicateDir }

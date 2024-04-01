@@ -1,31 +1,12 @@
 #!/usr/bin/env node
 
-import fs from 'node:fs';
 import path from 'node:path';
-import { banner } from './utils';
-import p, { intro, outro, text, select, isCancel, cancel, spinner } from '@clack/prompts';
+import { banner, checkDuplicateDir } from './utils';
+import { intro, outro, text, select, isCancel, cancel, note, spinner, log } from '@clack/prompts';
 import color from 'picocolors';
 import { choices } from './templates';
 import degit from 'degit';
-import glob from 'glob';
 import { bugs } from '../package.json';
-
-/**
- * Check if there is duplicate directory
- */
-export function checkDuplicateDir(projectName: string): boolean {
-  const list = glob.sync('*')
-  if (list.length) {
-    const hasDuplicateNameDir = list.filter((name) => {
-      const fileName = path.resolve(process.cwd(), path.join('.', name))
-      const isDir = fs.statSync(fileName).isDirectory()
-      return name === projectName && isDir
-    })
-		return hasDuplicateNameDir.length > 0
-  } else {
-    return true
-  }
-}
 
 async function init() {
   console.clear()
@@ -33,11 +14,18 @@ async function init() {
 
   intro(banner('An easy way to create a new project - Powered by Leedom'));
 
+	const month: number = new Date().getMonth()
+	const day: number = new Date().getDay()
+	// Chinese National day
+	if (month === 9 && day === 1) {
+		log.message('🇨🇳  Happy National day!')
+	}
+
 	const name = await text({
 		message: 'Please input your project name:',
 		placeholder: 'my-project',
 		validate: (value) => {
-      const existDirectoryName = path.resolve(process.cwd(), path.join('.', value))
+      const existDirectoryName: string = path.resolve(process.cwd(), path.join('.', value))
 			if (!value) return 'Input your project name first!';
 			if (checkDuplicateDir(value)) return `Target directory ${color.underline(color.cyan(`${existDirectoryName}`))} already exists. Pick another name!`
 		},
@@ -73,13 +61,15 @@ async function init() {
 		force: true,
 		verbose: true,
 	});
-	const target = path.join(name || '.', '')
+	const target: string = path.join(name || '.', '')
 	
 	emitter.clone(target).then(async() => {
 		s.stop(color.green(('Succeed!')));
-		p.note(`cd ${target}\npnpm install\npnpm dev`, 'Next steps.');
+		note(`cd ${target}\npnpm install\npnpm dev`, 'Next steps.');
 		outro(`Problems? ${color.underline(color.cyan(`${bugs.url}`))}`)
 	});
 }
 
 init().catch(console.error)
+
+export default init
