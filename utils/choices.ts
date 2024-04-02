@@ -1,10 +1,10 @@
 interface Choice {
-  label: string;
-  value: string;
+  label: string
+  value: string
   hint?: string
 }
 
-type ChoiceList  = {
+interface ChoiceList {
   [key: string]: Choice[]
 }
 

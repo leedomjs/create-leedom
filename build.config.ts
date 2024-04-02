@@ -1,9 +1,9 @@
-import { defineBuildConfig } from 'unbuild';
+import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig([
   {
     entries: ['index'],
-    outDir: "dist",
+    outDir: 'dist',
     declaration: true,
     rollup: {
       emitCJS: true,
