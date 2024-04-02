@@ -9,6 +9,7 @@ import color from 'picocolors';
 import { choices } from './utils/choices';
 import degit from 'degit';
 import { bugs } from './package.json';
+import { onCancel } from './utils/clack';
 
 async function init() {
   console.clear()
@@ -26,29 +27,20 @@ async function init() {
 			if (!value) return 'Input your project name first!';
 			if (checkDuplicateDir(value)) return `Target directory ${color.underline(color.cyan(`${existDirectoryName}`))} already exists. Pick another name!`
 		},
-	})
-	if (isCancel(name)) {
-		cancel('Operation cancelled.');
-		process.exit(0);
-	}
+	}) as string
+	onCancel(name)
 
 	const type = await select({
 		message: `Select template type:`,
 		options: choices['type'],
-	})
-	if (isCancel(type)) {
-		cancel('Operation cancelled.');
-		process.exit(0);
-	}
+	}) as string
+	onCancel(type)
 
 	const url = await select({
 		message: `Select template:`,
 		options: choices[type as string],
-	})
-	if (isCancel(url)) {
-		cancel('Operation cancelled.');
-		process.exit(0);
-	}
+	}) as string
+	onCancel(url)
 	
 	const s = spinner();
 	s.start('Downloading');
@@ -58,7 +50,7 @@ async function init() {
 		force: true,
 		verbose: true,
 	});
-	const target: string = path.join(name || '.', '')
+	const target: string = path.join(name as string || '.', '')
 	
 	emitter.clone(target).then(async() => {
 		s.stop(color.green(('Succeed!')));
