@@ -8,7 +8,7 @@ type ChoiceList  = {
   [key: string]: Choice[]
 }
 
-const choices: ChoiceList = {
+export const choices: ChoiceList = {
   operate: [
     { label: '默认模版', value: 'default' },
     { label: '远程仓库', value: 'repo' },
@@ -27,5 +27,3 @@ const choices: ChoiceList = {
     { label: 'Vue CLI + Vue 2', value: 'PanJiaChen/vue-element-admin#master' },
   ],
 }
-
-export { choices }

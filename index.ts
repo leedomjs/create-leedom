@@ -1,25 +1,22 @@
 #!/usr/bin/env node
 
 import path from 'node:path';
-import { banner, checkDuplicateDir } from './utils';
-import { intro, outro, text, select, isCancel, cancel, note, spinner, log } from '@clack/prompts';
+import { info, banner  } from './utils/intro';
+import { checkDuplicateDir } from './utils/checkDuplicateDir';
+import { stinger } from './utils/stinger';
+import { intro, outro, text, select, isCancel, cancel, note, spinner } from '@clack/prompts';
 import color from 'picocolors';
-import { choices } from './templates';
+import { choices } from './utils/choices';
 import degit from 'degit';
-import { bugs } from '../package.json';
+import { bugs } from './package.json';
 
 async function init() {
   console.clear()
   console.log();
 
-  intro(banner('An easy way to create a new project - Powered by Leedom'));
+  intro(banner(info));
 
-	const month: number = new Date().getMonth()
-	const day: number = new Date().getDay()
-	// Chinese National day
-	if (month === 9 && day === 1) {
-		log.message('🇨🇳  Happy National day!')
-	}
+	await stinger()
 
 	const name = await text({
 		message: 'Please input your project name:',
