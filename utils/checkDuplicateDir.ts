@@ -1,4 +1,4 @@
-import glob from 'glob';
+import * as glob from 'glob';
 import fs from 'node:fs';
 import path from 'node:path';
 
