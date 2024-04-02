@@ -1,8 +1,8 @@
 import { isCancel, cancel } from '@clack/prompts';
 
-export function onCancel(field: string) {
+export function onCancel(field: string, info?: string) {
   if (isCancel(field)) {
-		cancel('Operation cancelled.');
+		cancel(info || 'Operation cancelled.');
 		process.exit(0);
   }
 }
