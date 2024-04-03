@@ -1,8 +1,5 @@
 import { log } from '@clack/prompts'
-
-interface Day {
-  [key: string]: string
-}
+import type { Day } from './types'
 
 // special days
 export const specialDays: Day = {
