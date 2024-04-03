@@ -2,6 +2,7 @@
 
 import path from 'node:path'
 import process from 'node:process'
+import { exec } from 'node:child_process'
 import { intro, note, outro, select, spinner, text } from '@clack/prompts'
 import color from 'picocolors'
 import degit from 'degit'
@@ -58,6 +59,8 @@ async function init() {
   const target: string = path.join(name as string || '.', '')
 
   emitter.clone(target).then(async () => {
+    const directory = path.resolve(process.cwd(), path.join('.', target))
+    await exec('git init', { cwd: directory })
     s.stop(color.green(('Succeed!')))
     note(`cd ${target}\npnpm install\npnpm dev`, 'Next steps.')
     outro(`Problems? ${color.underline(color.cyan(`${bugs.url}`))}`)
