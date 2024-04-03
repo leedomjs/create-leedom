@@ -25,10 +25,12 @@ async function init() {
     placeholder: 'my-project',
     validate: (value) => {
       const existDirectoryName: string = path.resolve(process.cwd(), path.join('.', value))
-      if (!value)
+      if (!value) {
         return 'Input your project name first!'
-      if (checkDuplicateDir(value))
+      }
+      if (checkDuplicateDir(value)) {
         return `Target directory ${color.underline(color.cyan(`${existDirectoryName}`))} already exists. Pick another name!`
+      }
     },
   }) as string
   onCancel(name)
