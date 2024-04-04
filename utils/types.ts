@@ -22,3 +22,14 @@ export interface Choice {
 export interface ChoiceList {
   [key: string]: Choice[]
 }
+
+/**
+ * download params contain clack note
+ */
+export interface NoteOption {
+  url: string
+  projectName: string
+  clackType: string
+  message?: string
+  title?: string
+}

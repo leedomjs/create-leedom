@@ -2,16 +2,14 @@
 
 import path from 'node:path'
 import process from 'node:process'
-import { exec } from 'node:child_process'
-import { intro, note, outro, select, spinner, text } from '@clack/prompts'
+import { intro, select, text } from '@clack/prompts'
 import color from 'picocolors'
-import degit from 'degit'
 import { banner, info } from './utils/intro'
 import { checkDuplicateDir } from './utils/checkDuplicateDir'
 import { stinger } from './utils/stinger'
 import { choices } from './utils/choices'
-import { bugs } from './package.json'
 import { onCancel } from './utils/clack'
+import { download } from './utils/download'
 
 async function init() {
   console.clear()
@@ -36,6 +34,39 @@ async function init() {
   }) as string
   onCancel(name)
 
+  const operate = await select({
+    message: 'Select operation:',
+    options: choices['operate'],
+  }) as string
+  onCancel(operate)
+
+  operate === 'template' ? defaultAction(name, operate) : remoteRepo(name, operate)
+}
+
+// select remote repo
+async function remoteRepo(projectName: string, clackType: string) {
+  const repoLink = await text({
+    message: 'Input the repo link you want:',
+    placeholder: 'leedom92/vue-h5-template',
+    validate: (value) => {
+      if (!value) {
+        return 'Please input the repo link!'
+      }
+    },
+  }) as string
+  onCancel(repoLink)
+
+  const directory: string = path.resolve(process.cwd(), path.join(projectName || '.', ''))
+  await download({
+    url: repoLink,
+    projectName,
+    clackType,
+    message: `Please refer to ${color.underline(color.cyan(`${directory}/README.md`))} to start the project.`,
+  })
+}
+
+// select default template
+async function defaultAction(projectName: string, clackType: string) {
   const type = await select({
     message: 'Select template type:',
     options: choices['type'],
@@ -48,22 +79,12 @@ async function init() {
   }) as string
   onCancel(url)
 
-  const s = spinner()
-  s.start('Downloading')
-
-  const emitter = degit(url, {
-    cache: false,
-    force: true,
-    verbose: true,
-  })
-  const target: string = path.join(name || '.', '')
-
-  emitter.clone(target).then(async () => {
-    const directory = path.resolve(process.cwd(), path.join('.', target))
-    await exec('git init', { cwd: directory })
-    s.stop(color.green(('Succeed!')))
-    note(`cd ${target}\npnpm install\npnpm dev`, 'Next steps.')
-    outro(`Problems? ${color.underline(color.cyan(`${bugs.url}`))}`)
+  const target: string = path.join(projectName || '.', '')
+  await download({
+    url,
+    projectName,
+    clackType,
+    message: `cd ${target}\npnpm install\npnpm dev`,
   })
 }
 

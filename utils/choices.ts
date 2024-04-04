@@ -2,8 +2,8 @@ import type { ChoiceList } from './types'
 
 export const choices: ChoiceList = {
   operate: [
-    { label: '默认模版', value: 'default' },
-    { label: '远程仓库', value: 'repo' },
+    { label: 'Template', value: 'template' },
+    { label: 'Remote', value: 'remote' },
   ],
   type: [
     { label: 'Mobile', value: 'mobile' },
