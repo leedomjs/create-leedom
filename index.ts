@@ -44,7 +44,7 @@ async function init() {
 
   const url = await select({
     message: 'Select template:',
-    options: choices[type as string],
+    options: choices[type],
   }) as string
   onCancel(url)
 
@@ -56,7 +56,7 @@ async function init() {
     force: true,
     verbose: true,
   })
-  const target: string = path.join(name as string || '.', '')
+  const target: string = path.join(name || '.', '')
 
   emitter.clone(target).then(async () => {
     const directory = path.resolve(process.cwd(), path.join('.', target))
