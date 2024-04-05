@@ -4,7 +4,7 @@
 
 An easy way to create a new project.
 
-<img width="690" alt="create-leedom" src="https://github.com/leedomjs/create-leedom/assets/30711792/2a165fa6-129d-41cd-9945-faef9a69eea7">
+<img width="752" alt="create-leedom" src="https://github.com/leedomjs/create-leedom/assets/30711792/ffd9a579-52a4-498e-a0b9-9df812a8de86">
 
 ## Usage
 ### online
@@ -26,8 +26,9 @@ In this way the CLI works fine, when you are offline. And it will use cache by d
 
 ## Action
 <div align="center">
-  <video src="https://github.com/leedomjs/create-leedom/assets/30711792/ffd463db-9b28-4d27-91f4-d24cf3f21188" />
+  <video src="https://github.com/leedomjs/create-leedom/assets/30711792/8fee1930-1d19-4280-bc93-1f381bd034d8" />
 </div>
+
 
 ## License
 
