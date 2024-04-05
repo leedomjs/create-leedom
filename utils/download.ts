@@ -7,15 +7,18 @@ import degit from 'degit'
 import { bugs } from '../package.json'
 import type { NoteOption } from './types'
 
-export async function download({ url, projectName, clackType = 'template', message, title = 'Next steps.' }: NoteOption) {
+export async function download({
+  cache,
+  url,
+  projectName,
+  clackType = 'template',
+  message,
+  title = 'Next steps.',
+}: NoteOption) {
   const loading = spinner()
   loading.start('Downloading')
 
-  const emitter = await degit(url, {
-    cache: false,
-    force: true,
-    verbose: true,
-  })
+  const emitter = await degit(url, { cache })
   const target: string = path.join(projectName || '.', '')
 
   emitter.clone(target).then(async () => {

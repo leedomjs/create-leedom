@@ -8,7 +8,7 @@ import { banner, info } from './utils/intro'
 import { checkDuplicateDir } from './utils/checkDuplicateDir'
 import { stinger } from './utils/stinger'
 import { choices } from './utils/choices'
-import { onCancel } from './utils/clack'
+import { useCache, useCancel } from './utils/clack'
 import { download } from './utils/download'
 
 async function init() {
@@ -19,6 +19,7 @@ async function init() {
 
   await stinger()
 
+  // Project name
   const name = await text({
     message: 'Please input your project name:',
     placeholder: 'my-project',
@@ -32,19 +33,24 @@ async function init() {
       }
     },
   }) as string
-  onCancel(name)
+  useCancel(name)
 
+  // Select template or remote
   const operate = await select({
     message: 'Select operation:',
     options: choices['operate'],
   }) as string
-  onCancel(operate)
+  useCancel(operate)
 
+  // Do different action
   operate === 'template' ? defaultAction(name, operate) : remoteRepo(name, operate)
 }
 
-// select remote repo
+/**
+ * remote repo
+ */
 async function remoteRepo(projectName: string, clackType: string) {
+  // Repo link
   const repoLink = await text({
     message: 'Input the repo link you want:',
     placeholder: 'leedom92/vue-h5-template',
@@ -54,10 +60,17 @@ async function remoteRepo(projectName: string, clackType: string) {
       }
     },
   }) as string
-  onCancel(repoLink)
+  useCancel(repoLink)
+
+  // Use cache?
+  const cache = await useCache()
+  useCancel(cache)
 
   const directory: string = path.resolve(process.cwd(), path.join(projectName || '.', ''))
+
+  // download
   await download({
+    cache,
     url: repoLink,
     projectName,
     clackType,
@@ -65,22 +78,33 @@ async function remoteRepo(projectName: string, clackType: string) {
   })
 }
 
-// select default template
+/**
+ * default template
+ */
 async function defaultAction(projectName: string, clackType: string) {
+  // Select template type
   const type = await select({
     message: 'Select template type:',
     options: choices['type'],
   }) as string
-  onCancel(type)
+  useCancel(type)
 
+  // Select template
   const url = await select({
     message: 'Select template:',
     options: choices[type],
   }) as string
-  onCancel(url)
+  useCancel(url)
+
+  // Use cache?
+  const cache = await useCache()
+  useCancel(cache)
 
   const target: string = path.join(projectName || '.', '')
+
+  // download
   await download({
+    cache,
     url,
     projectName,
     clackType,

@@ -32,4 +32,5 @@ export interface NoteOption {
   clackType: string
   message?: string
   title?: string
+  cache?: boolean
 }
