@@ -2,6 +2,7 @@
 
 import path from 'node:path'
 import process from 'node:process'
+import { parseArgs } from 'node:util'
 import { intro, select, text } from '@clack/prompts'
 import color from 'picocolors'
 import { banner, info } from './utils/intro'
@@ -19,10 +20,20 @@ async function init() {
 
   await stinger()
 
+  const args = process.argv.slice(2)
+
+  const { positionals } = parseArgs({
+    args,
+    strict: false,
+  })
+
+  const projectName = positionals[0]
+
   // Project name
   const name = await text({
     message: 'Please input your project name:',
     placeholder: 'my-project',
+    initialValue: projectName,
     validate: (value) => {
       const existDirectoryName: string = path.resolve(process.cwd(), path.join('.', value))
       if (!value) {
