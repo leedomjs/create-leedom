@@ -11,6 +11,9 @@ An easy way to create a new project.
 
 ```bash
 npm create leedom@latest
+
+# or you could give a word as initial project name
+npm create leedom@latest my-project
 ```
 Note that the tag name (`@latest`) **`MUST NOT`** be omitted, otherwise npm may resolve to a **`cached and outdated version`** of the package.
 
