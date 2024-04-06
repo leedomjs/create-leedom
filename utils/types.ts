@@ -30,7 +30,7 @@ export interface NoteOption {
   url: string
   projectName: string
   clackType: string
-  message?: string
+  message: string
   title?: string
   cache?: boolean
 }
