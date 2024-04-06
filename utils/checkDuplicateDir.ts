@@ -6,7 +6,7 @@ import * as glob from 'glob'
 /**
  * Check if there is duplicate directory
  */
-export function checkDuplicateDir(projectName: string): boolean {
+export default function checkDuplicateDir(projectName: string): boolean {
   const list: string[] = glob.sync('*')
   if (list.length) {
     const hasDuplicateNameDir: Array<string> = list.filter((name: string) => {

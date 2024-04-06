@@ -7,7 +7,7 @@ import degit from 'degit'
 import { bugs } from '../package.json'
 import type { NoteOption } from './types'
 
-export async function download({
+export default async function download({
   cache,
   url,
   projectName,

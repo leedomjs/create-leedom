@@ -5,12 +5,16 @@ import process from 'node:process'
 import { parseArgs } from 'node:util'
 import { intro, select, text } from '@clack/prompts'
 import color from 'picocolors'
-import { banner, info } from './utils/intro'
-import { checkDuplicateDir } from './utils/checkDuplicateDir'
-import { stinger } from './utils/stinger'
-import { choices } from './utils/choices'
-import { useCache, useCancel } from './utils/clack'
-import { download } from './utils/download'
+import {
+  banner,
+  checkDuplicateDir,
+  choices,
+  download,
+  info,
+  stinger,
+  useCache,
+  useCancel,
+} from './utils'
 
 async function init() {
   console.clear()

@@ -13,7 +13,7 @@ export const specialDays: Day = {
 }
 
 // show stinger
-export function stinger(): void {
+export default function stinger(): void {
   const month = `${new Date().getMonth() + 1}`
   const day = `${new Date().getDay()}`
   const date = month + day
