@@ -125,7 +125,7 @@ async function defaultAction(projectName: string, clackType: string) {
     projectName,
     clackType,
     message: `cd ${target}\npnpm install\npnpm dev`,
-  })
+  }).catch(() => process.exit(1))
 }
 
 init().catch(console.error)

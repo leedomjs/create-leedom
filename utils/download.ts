@@ -27,5 +27,6 @@ export default async function download({
     loading.stop(color.green(('Succeed!')))
     clackType === 'template' ? note(message, title) : log.step(message)
     outro(`Problems? ${color.underline(color.cyan(`${bugs.url}`))}`)
+    process.exit(0)
   })
 }
