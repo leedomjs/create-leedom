@@ -10,6 +10,7 @@ import {
   checkDuplicateDir,
   choices,
   download,
+  fixDirectoryPath,
   info,
   stinger,
   useCache,
@@ -44,7 +45,7 @@ async function init() {
         return 'Input your project name first!'
       }
       if (checkDuplicateDir(value)) {
-        return `Target directory ${color.underline(color.cyan(`${existDirectoryName}`))} already exists. Pick another name!`
+        return `Target directory ${color.underline(color.cyan(`${fixDirectoryPath(existDirectoryName)}`))} already exists. Pick another name!`
       }
     },
   }) as string
@@ -89,7 +90,7 @@ async function remoteRepo(projectName: string, clackType: string) {
     url: repoLink,
     projectName,
     clackType,
-    message: `Please refer to ${color.underline(color.cyan(`${directory}/README.md`))} to start the project.`,
+    message: `Please refer to ${color.underline(color.cyan(`${fixDirectoryPath(directory)}/README.md`))} to start the project.`,
   })
 }
 
