@@ -16,7 +16,5 @@ export default function checkDuplicateDir(projectName: string): boolean {
     })
     return hasDuplicateNameDir.length > 0
   }
-  else {
-    return true
-  }
+  return false
 }
