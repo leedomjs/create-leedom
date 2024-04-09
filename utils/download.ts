@@ -25,7 +25,7 @@ export default async function download({
     const directory = path.resolve(process.cwd(), path.join('.', target))
     await exec('git init --initial-branch=main', { cwd: directory })
     loading.stop(color.green(('Succeed!')))
-    clackType === 'template' ? note(message, title) : log.step(message)
+    clackType === 'template' ? note(message, title) : log.success(message)
     outro(`Problems? ${color.underline(color.cyan(`${bugs.url}`))}`)
     process.exit(0)
   })
