@@ -18,7 +18,6 @@ import {
 } from './utils'
 
 async function init() {
-  console.clear()
   console.log()
 
   intro(banner(info))
