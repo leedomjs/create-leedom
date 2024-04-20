@@ -8,6 +8,7 @@ import color from 'picocolors'
 import {
   banner,
   checkDuplicateDir,
+  checkNewVersion,
   choices,
   download,
   fixDirectoryPath,
@@ -23,6 +24,8 @@ async function init() {
   intro(banner(info))
 
   await stinger()
+
+  await checkNewVersion().catch(() => process.exit(0))
 
   const args = process.argv.slice(2)
 
