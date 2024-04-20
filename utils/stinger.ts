@@ -15,7 +15,7 @@ export const specialDays: Day = {
 // show stinger
 export default function stinger(): void {
   const month = `${new Date().getMonth() + 1}`
-  const day = `${new Date().getDay()}`
+  const day = `${new Date().getDate()}`
   const date = month + day
   specialDays[date] && log.message(specialDays[date])
 }
