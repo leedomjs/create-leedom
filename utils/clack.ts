@@ -13,7 +13,7 @@ export function useCancel(field: FieldType, info?: string): void {
 export async function useCache(): Promise<boolean> {
   const cache = await confirm({
     message: 'Use cache?',
-    initialValue: true,
+    initialValue: false,
   }) as boolean
   return cache
 }
