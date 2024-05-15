@@ -15,7 +15,8 @@ export const choices: ChoiceList = {
     { label: 'Vue CLI + Vue 2', value: 'leedom92/vue-h5-template#vue-h5-webpack-template' },
   ],
   pc: [
-    { label: 'Vite + Vue 3', value: 'kailong321200875/vue-element-plus-admin#master', hint: 'recommended' },
-    { label: 'Vue CLI + Vue 2', value: 'PanJiaChen/vue-element-admin#master' },
+    { label: 'Vite + Vue 3 + Naive UI', value: 'zclzone/vue-naive-admin#2.x', hint: 'recommended' },
+    { label: 'Vite + Vue 3 + Element-Plus', value: 'kailong321200875/vue-element-plus-admin#master' },
+    { label: 'Vue CLI + Vue 2 + Element', value: 'leedom92/vue-element-admin#main' },
   ],
 }
