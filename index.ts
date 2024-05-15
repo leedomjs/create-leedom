@@ -130,3 +130,5 @@ async function defaultAction(projectName: string, clackType: string) {
 init().catch(console.error)
 
 export default init
+
+export * from './utils/types'
